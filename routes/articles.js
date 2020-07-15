@@ -20,17 +20,6 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
-  const file = req.file
-  if (!file) {
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-  }
-  res.send(file)
-
-})
-
 
 router.post("/article", upload.single('article'), async (request, response) => {
   try {
@@ -51,7 +40,7 @@ router.post("/article", upload.single('article'), async (request, response) => {
 });
 
 router.get("/article", (request, response) => {
-  Article.find({}).populate("user").exec((err, data) => {
+  Article.find({}).populate("user").populate('comments.user').exec((err, data) => {
     if (err)
       return response.status(405).send('erreur')
     return response.status(200).send(data)

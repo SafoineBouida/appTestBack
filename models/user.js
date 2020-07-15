@@ -22,6 +22,10 @@ var userSchema = new Schema({
     type: String,
     required: true,
   },
+  photo: {
+    type: String,
+    required: false,
+  },
 });
 
 var User = mongoose.model('User', userSchema);

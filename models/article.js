@@ -35,7 +35,8 @@ var userSchema = new Schema({
       ref : 'User'
     },
   }],
-});
+  
+}, { timestamps: { createdAt: 'created_at' } });
 
 var Article = mongoose.model('Article', userSchema);
 
